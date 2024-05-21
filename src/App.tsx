@@ -1,9 +1,7 @@
-import React from 'react'
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeToggle } from "@/components/mode-toggle"
 import Header from "@/components/header"
-
-
+1
 import './App.css'
 
 function App() {
@@ -13,9 +11,8 @@ function App() {
     <div>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <div className="container mx-auto">
-          <Header title="Vite App" />
-          <ModeToggle />
-            {/* Contenido principal de la aplicación */}
+          <Header />   
+            
         
         </div>
       </ThemeProvider>

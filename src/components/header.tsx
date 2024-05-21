@@ -1,27 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ModeToggle } from "@/components/mode-toggle"
 
-interface HeaderProps {
-  logo?: string;
-  title?: string;
-  links?: Array<{ label: string; href: string }>;
-}
-
-const Header: React.FC<HeaderProps> = ({ logo, title, links }) => {
+const Header: React.FC = () => {
   return (
-    <header className="bg-gray-800 text-white px-4 py-4 flex items-center justify-between">
-      <div className="flex items-center">
-        {logo && <img src={logo} alt={title || 'Logo de tu app'} className="h-8" />}
-        {title && <h1 className="text-xl font-bold ml-4">{title}</h1>}
-      </div>
-      <nav>
-        {links?.map((link) => (
-          <Link key={link.href} to={link.href} className="text-lg font-medium mr-4">
-            {link.label}
-          </Link>
-        ))}
-      </nav>
-    </header> 
+    <header className="fixed top-0 left-0 right-0 h-12 bg-black-800 flex items-center justify-between px-4">
+      <h1 className="text-lg font-bold">Dolar</h1>
+      
+      <ModeToggle />
+
+    </header>
   );
 };
 
