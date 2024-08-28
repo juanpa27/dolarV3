@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSpring, animated } from '@react-spring/web';
 
 interface DollarQuoteCardProps {
   compra: number;
@@ -8,6 +9,10 @@ interface DollarQuoteCardProps {
 }
 
 const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({ compra, venta, entidad,referencial }) => {
+  const compraSpring = useSpring({ number: compra, from: { number: 0 }, config: { tension: 120, friction: 14 } });
+  const ventaSpring = useSpring({ number: venta, from: { number: 0 }, config: { tension: 120, friction: 14 } });
+  const referencialSpring = useSpring({ number: referencial || 0, from: { number: 0 }, config: { tension: 120, friction: 14 } });
+
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="pb-2">
@@ -15,9 +20,11 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({ compra, venta, entida
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center w-full justify-start" >
             <span className="text-sm font-medium">Compra:</span>
-            <span className="text-2xl font-bold text-green-600 dark:text-green-400">₲{compra}</span>
+              <animated.span className="text-2xl font-bold text-green-600 dark:text-green-400">
+              {compraSpring.number.to((n) => n.toFixed(2))}
+            </animated.span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium">Venta:</span>
