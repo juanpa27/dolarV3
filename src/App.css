@@ -1,7 +1,5 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -33,10 +31,66 @@
   }
 }
 
-.card {
-  padding: 2em;
+
+@font-face {
+  font-family: 'Digital-7';
+  src: url('./fonts/digital-7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.read-the-docs {
-  color: #888;
+@font-face {
+  font-family: 'Digital-7';
+  src: url('./fonts/digital-7 (italic).ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
 }
+
+@font-face {
+  font-family: 'Digital-7 Mono';
+  src: url('./fonts/digital-7 (mono).ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Digital-7 Mono';
+  src: url('./fonts/digital-7 (mono italic).ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+.digital-font {
+  font-family: 'Digital-7', monospace;
+  color: red;
+}
+
+.digital-mono-font {
+  font-family: 'Digital-7 Mono', monospace;
+  color: red;
+}
+
+/*
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 
+      0 0 1px #ff0000, 
+      0 0 2px #ff0000, 
+      0 0 3px #ff0000;
+    color: #ff6666;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    color: #550000;
+  }
+}
+
+.digital-font {
+  font-family: 'Digital-7', monospace;
+  color: #ff6666;
+  text-shadow: 
+    0 0 1px #ff0000, 
+    0 0 2px #ff0000, 
+    0 0 3px #ff0000;
+  animation: flicker 2s infinite alternate;
+}*/

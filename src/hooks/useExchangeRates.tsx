@@ -24,7 +24,8 @@ interface ExchangeRates {
 const useExchangeRates = () => {
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates>({});
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null); // Para manejar posibles errores
+  const [updated, setUpdated] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +36,7 @@ const useExchangeRates = () => {
         }
         const data = await response.json();
         setExchangeRates(data.dolarpy);
+        setUpdated(data.updated);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error.message);
@@ -46,7 +48,7 @@ const useExchangeRates = () => {
     fetchData();
   }, []);
 
-  return { exchangeRates, loading, error };
+  return { exchangeRates, updated,loading, error };
 };
 
 export default useExchangeRates;

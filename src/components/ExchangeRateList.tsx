@@ -1,9 +1,10 @@
 import React from 'react';
 import DollarQuoteCard from './DollarQuoteCard';
 import useExchangeRates from '../hooks/useExchangeRates'; 
+import { Badge } from "@/components/ui/badge"
 
 const ExchangeRateList: React.FC = () => {
-  const { exchangeRates, loading } = useExchangeRates();
+  const { exchangeRates, updated,loading } = useExchangeRates();
 
   if (loading) { 
     return <div>Cargando...</div>; 
@@ -34,11 +35,18 @@ const ExchangeRateList: React.FC = () => {
         <DollarQuoteCard
           key={entidad}
           entidad={formattedEntityName(entidad)}
-          compra={data?.compra || 0}  // Usando valores por defecto si no existe la propiedad
+          compra={data?.compra || 0}  
           venta={data?.venta || 0}  
-          referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} //   // Usando valores por defecto si no existe la propiedad
+          referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} 
         />
       ))}
+       {updated && (
+               
+          <span className="text-gray-900 dark:text-gray-200 mt-4">
+            <Badge variant="outline">Última actualización: {new Date(updated).toLocaleString()}</Badge>
+          </span>
+        
+      )}
     </div>
   );
 }; 
