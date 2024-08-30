@@ -1,4 +1,4 @@
-import { Github, Twitter, Globe, Code } from "lucide-react"
+import { Github, Twitter, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function Footer() {

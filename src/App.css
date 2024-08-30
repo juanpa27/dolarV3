@@ -1,6 +1,7 @@
 #root {
   margin: 0 auto;
   text-align: center;
+
 }
 
 
@@ -44,6 +45,7 @@
 }
 
 /*
+
 @keyframes flicker {
   0%, 18%, 22%, 25%, 53%, 57%, 100% {
     text-shadow: 
@@ -54,9 +56,10 @@
   }
   20%, 24%, 55% {
     text-shadow: none;
-    color: #550000;
+    color: #550000; 
   }
-}
+} 
+ 
 
 .digital-font {
   font-family: 'Digital-7', monospace;

@@ -2,13 +2,17 @@ import React from 'react';
 import DollarQuoteCard from './DollarQuoteCard';
 import useExchangeRates from '../hooks/useExchangeRates'; 
 import { Badge } from "@/components/ui/badge"
+import GraficoBarra from './GraficoBarra';
 
 const ExchangeRateList: React.FC = () => {
-  const { exchangeRates, updated,loading } = useExchangeRates();
+  const { exchangeRates,updated,loading } = useExchangeRates();
 
   if (loading) { 
     return <div>Cargando...</div>; 
   }
+  //definicion del chartConfig 
+
+ 
 
   const formattedEntityName = (entidad: string) => {
     switch (entidad) {
@@ -22,12 +26,20 @@ const ExchangeRateList: React.FC = () => {
       case 'mundialcambios': return 'MUNDIAL CAMBIOS';
       case 'mydcambios': return 'MYD CAMBIOS';
       case 'set': return 'SET';
-      case 'vision': return 'VISION';
+      case 'vision': return 'UENO';
       
       
       default: return entidad.toUpperCase(); // Por defecto convierte a mayúsculas
     }
   };
+
+  const chartData = Object.entries(exchangeRates).map(([entidad, data]) => ({
+    entidad: formattedEntityName(entidad),
+    compra: data?.compra || 0,
+    venta: data?.venta || 0,
+  }));
+
+  
 
   return (
     <>
@@ -41,6 +53,12 @@ const ExchangeRateList: React.FC = () => {
             referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} 
           />
         ))}
+      </div>
+
+      <div className="mt-8 flex justify-center">
+        <div className="w-full max-w-xl min-h-max">
+          <GraficoBarra data={chartData} />
+        </div>
       </div>
       
       {updated && (
