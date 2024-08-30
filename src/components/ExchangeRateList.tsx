@@ -25,29 +25,32 @@ const ExchangeRateList: React.FC = () => {
       case 'vision': return 'VISION';
       
       
-      default: return entidad.toUpperCase(); // Por defecto, convierte a mayúsculas
+      default: return entidad.toUpperCase(); // Por defecto convierte a mayúsculas
     }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {Object.entries(exchangeRates).map(([entidad, data]) => (
-        <DollarQuoteCard
-          key={entidad}
-          entidad={formattedEntityName(entidad)}
-          compra={data?.compra || 0}  
-          venta={data?.venta || 0}  
-          referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} 
-        />
-      ))}
-       {updated && (
-               
-          <span className="text-gray-900 dark:text-gray-200 mt-4">
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Object.entries(exchangeRates).map(([entidad, data]) => (
+          <DollarQuoteCard
+            key={entidad}
+            entidad={formattedEntityName(entidad)}
+            compra={data?.compra || 0}  
+            venta={data?.venta || 0}  
+            referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} 
+          />
+        ))}
+      </div>
+      
+      {updated && (
+        <div className="text-center mt-4 mb-4">
+          <span className="text-gray-900 dark:text-gray-200">
             <Badge variant="outline">Última actualización: {new Date(updated).toLocaleString()}</Badge>
           </span>
-        
+        </div>
       )}
-    </div>
+    </>
   );
 }; 
 

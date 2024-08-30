@@ -31,11 +31,8 @@ export function Footer() {
               <Github className="h-4 w-4" />
             </a>
           </Button>
-          <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
-            <a href="https://github.com/melizeche/dolarPy" target="_blank" rel="noopener noreferrer" aria-label="Código fuente">
-              <Code className="h-4 w-4" />
-            </a>
-          </Button>
+          
+          
         </div>
       </div>
     </footer>
