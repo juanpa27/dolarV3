@@ -3,12 +3,21 @@ import DollarQuoteCard from './DollarQuoteCard';
 import useExchangeRates from '../hooks/useExchangeRates'; 
 import { Badge } from "@/components/ui/badge"
 import GraficoBarra from './GraficoBarra';
+import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
 
 const ExchangeRateList: React.FC = () => {
   const { exchangeRates,updated,loading } = useExchangeRates();
 
   if (loading) { 
-    return <div>Cargando...</div>; 
+    return (
+      <>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6, 7 ,8 , 9].map((key) => (
+            <SkeletonDollarQuoteCard key={key} />
+          ))}
+        </div>
+      </>
+    );
   }
   //definicion del chartConfig 
 
