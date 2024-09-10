@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# Dolar V3
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto fue creado utilizando **React + TypeScript + Vite** con el objetivo de consumir cotizaciones del dólar desde el webservice de [@melizeche](https://github.com/melizeche). Las cotizaciones obtenidas se almacenan en una base de datos **PostgreSQL** y se pueden visualizar en una tabla interactiva con gráficos.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Consumo de API para obtener cotizaciones de diferentes entidades.
+- Inserción automática de cotizaciones en una base de datos **PostgreSQL**.
+- Uso de **Vercel Cron Jobs** para programar tareas automáticas.
+- Visualización de gráficos de cotizaciones usando **Recharts**.
+- Diseño responsivo con **Tailwind CSS** y **ShadCN UI**.
 
-## Expanding the ESLint configuration
+## Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React (Vite)**
+- **PostgreSQL** (Vercel)
+- **Vercel Cron Jobs**
+- **Tailwind CSS**
+- **ShadCN UI**
+- **Recharts**
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Contribuciones
