@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider"
-import Header  from './components/Header';
+import { Header }  from '@/components/Header';
 import ExchangeRateList from './components/ExchangeRateList'; 
 import {Footer} from '@/components/Footer';
 //css
@@ -21,5 +21,4 @@ function App() {
     </div>
   );
 }
-
 export default App
