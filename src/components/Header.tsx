@@ -1,5 +1,4 @@
 import { ModeToggle } from "@/components/mode-toggle"
-
 const nombre = '${DolarPy}';
 export default function Header() {
   return (
