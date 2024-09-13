@@ -4,7 +4,7 @@ import ExchangeRateList from './components/ExchangeRateList';
 import {Footer} from '@/components/Footer';
 //css
 import './App.css';
-
+ 
 
 function App() {
   return (
