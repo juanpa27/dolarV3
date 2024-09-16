@@ -3,6 +3,7 @@ import DollarQuoteCard from './DollarQuoteCard';
 import useExchangeRates from '../hooks/useExchangeRates'; 
 import { Badge } from "@/components/ui/badge"
 import GraficoBarra from './GraficoBarra';
+import GraficoLienal from './GraficoLineal';
 import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
 
 const ExchangeRateList: React.FC = () => {
@@ -67,6 +68,9 @@ const ExchangeRateList: React.FC = () => {
       <div className="mt-8 flex justify-center">
         <div className="w-full max-w-xl min-h-max">
           <GraficoBarra data={chartData} />
+        </div>
+        <div className="w-full max-w-xl min-h-max">
+          <GraficoLienal />
         </div>
       </div>
       
