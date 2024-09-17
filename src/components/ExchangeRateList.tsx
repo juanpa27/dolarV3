@@ -1,6 +1,7 @@
 import React from 'react';
 import DollarQuoteCard from './DollarQuoteCard';
 import useExchangeRates from '../hooks/useExchangeRates'; 
+import useExchangeHistorical from '../hooks/useExchangeHistorical';
 import { Badge } from "@/components/ui/badge"
 import GraficoBarra from './GraficoBarra';
 import GraficoLienal from './GraficoLineal';
@@ -8,6 +9,9 @@ import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
 
 const ExchangeRateList: React.FC = () => {
   const { exchangeRates,updated,loading } = useExchangeRates();
+  const { historicalRates } = useExchangeHistorical();
+  console.log(historicalRates);
+  
 
   if (loading) { 
     return (
@@ -20,10 +24,7 @@ const ExchangeRateList: React.FC = () => {
       </>
     );
   }
-  //definicion del chartConfig 
-
- 
-
+  
   const formattedEntityName = (entidad: string) => {
     switch (entidad) {
       case 'bcp': return 'BCP';

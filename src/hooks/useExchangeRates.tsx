@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 interface ExchangeRate {
   compra: number;
   venta: number;
-  referencial_diario?: number; // Este solo aplica a "bcp" según tu JSON.
+  referencial_diario?: number; 
 }
 
 interface ExchangeRates {
