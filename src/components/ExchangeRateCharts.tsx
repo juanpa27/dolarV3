@@ -18,7 +18,9 @@ const ExchangeRateCharts: React.FC<ExchangeRateChartsProps> = React.memo(({ char
       <div className="w-full max-w-xl min-h-max">
         <GraficoBarra data={chartData} />
       </div>
-      
+      <div className="w-full max-w-xl min-h-max">
+        <GraficoLienal />
+      </div>
     </div>
   );
 });
