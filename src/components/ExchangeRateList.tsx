@@ -1,31 +1,17 @@
-import React from 'react';
-import DollarQuoteCard from './DollarQuoteCard';
-import useExchangeRates from '../hooks/useExchangeRates'; 
+import React, { useCallback } from 'react';
+import useExchangeRates from '../hooks/useExchangeRates';
 import useExchangeHistorical from '../hooks/useExchangeHistorical';
-import { Badge } from "@/components/ui/badge"
-import GraficoBarra from './GraficoBarra';
-import GraficoLienal from './GraficoLineal';
+import { Badge } from '@/components/ui/badge';
 import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
+import ExchangeRateCards from './ExchangeRateCards';
+import ExchangeRateCharts from './ExchangeRateCharts';
 
 const ExchangeRateList: React.FC = () => {
-  const { exchangeRates,updated,loading } = useExchangeRates();
+  const { exchangeRates, updated, loading } = useExchangeRates();
   const { historicalRates } = useExchangeHistorical();
   console.log(historicalRates);
-  
 
-  if (loading) { 
-    return (
-      <>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[1, 2, 3, 4, 5, 6, 7 ,8 , 9].map((key) => (
-            <SkeletonDollarQuoteCard key={key} />
-          ))}
-        </div>
-      </>
-    );
-  }
-  
-  const formattedEntityName = (entidad: string) => {
+  const formattedEntityName = useCallback((entidad: string) => {
     switch (entidad) {
       case 'bcp': return 'BCP';
       case 'cambiosalberdi': return 'CAMBIOS ALBERDI';
@@ -38,11 +24,19 @@ const ExchangeRateList: React.FC = () => {
       case 'mydcambios': return 'MYD CAMBIOS';
       case 'set': return 'SET';
       case 'vision': return 'UENO';
-      
-      
-      default: return entidad.toUpperCase(); // Por defecto convierte a mayúsculas
+      default: return entidad.toUpperCase();
     }
-  };
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[...Array(9)].map((_, index) => (
+          <SkeletonDollarQuoteCard key={index} />
+        ))}
+      </div>
+    );
+  }
 
   const chartData = Object.entries(exchangeRates).map(([entidad, data]) => ({
     entidad: formattedEntityName(entidad),
@@ -50,40 +44,28 @@ const ExchangeRateList: React.FC = () => {
     venta: data?.venta || 0,
   }));
 
-  
-
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Object.entries(exchangeRates).map(([entidad, data]) => (
-          <DollarQuoteCard
-            key={entidad}
-            entidad={formattedEntityName(entidad)}
-            compra={data?.compra || 0}  
-            venta={data?.venta || 0}  
-            referencial={entidad === 'bcp' ? data?.referencial_diario : undefined} 
-          />
-        ))}
-      </div>
+      <ExchangeRateCards
+        exchangeRates={exchangeRates}
+        formattedEntityName={formattedEntityName}
+      />
 
-      <div className="mt-8 flex justify-center">
-        <div className="w-full max-w-xl min-h-max">
-          <GraficoBarra data={chartData} />
-        </div>
-        <div className="w-full max-w-xl min-h-max">
-          <GraficoLienal />
-        </div>
-      </div>
-      
+      <ExchangeRateCharts
+        chartData={chartData}
+      />
+
       {updated && (
         <div className="text-center mt-4 mb-4">
           <span className="text-gray-900 dark:text-gray-200">
-            <Badge variant="outline">Última actualización: {new Date(updated).toLocaleString()}</Badge>
+            <Badge variant="outline">
+              Última actualización: {new Date(updated).toLocaleString()}
+            </Badge>
           </span>
         </div>
       )}
     </>
   );
-}; 
+};
 
 export default ExchangeRateList;

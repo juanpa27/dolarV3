@@ -1,25 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface ExchangeRate {
-  compra: number;
-  venta: number;
-  referencial_diario?: number; 
-}
-
-interface ExchangeRates {
-  bcp?: ExchangeRate;
-  bonanza?: ExchangeRate;
-  cambiosalberdi?: ExchangeRate;
-  cambioschaco?: ExchangeRate;
-  eurocambios?: ExchangeRate;
-  gnbfusion?: ExchangeRate;
-  lamoneda?: ExchangeRate;
-  maxicambios?: ExchangeRate;
-  mundialcambios?: ExchangeRate;
-  mydcambios?: ExchangeRate;
-  set?: ExchangeRate;
-  vision?: ExchangeRate;
-}
+import { ExchangeRates } from '../types/types'; // Asegúrate de que la ruta es correcta
 
 const useExchangeRates = () => {
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates>({});
@@ -48,7 +28,7 @@ const useExchangeRates = () => {
     fetchData();
   }, []);
 
-  return { exchangeRates, updated,loading, error };
+  return { exchangeRates, updated, loading, error };
 };
 
 export default useExchangeRates;

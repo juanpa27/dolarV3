@@ -1,15 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-
-interface ExchangeRateWithDate {
-  compra: number;
-  venta: number;
-  referencial_diario?: number;
-  fecha: string;
-}
-
-interface HistoricalExchangeRates {
-  [entidad: string]: ExchangeRateWithDate[];
-}
+import { HistoricalExchangeRates } from '../types/types'; // Asegúrate de que la ruta es correcta
 
 const useExchangeHistorical = () => {
   const [historicalRates, setHistoricalRates] = useState<HistoricalExchangeRates | null>(null);
