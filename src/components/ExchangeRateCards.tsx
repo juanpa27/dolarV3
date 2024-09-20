@@ -1,5 +1,3 @@
-// ExchangeRateCards.tsx
-
 import React from 'react';
 import DollarQuoteCard from './DollarQuoteCard';
 import { ExchangeRates, HistoricalExchangeRates } from '../types/types';

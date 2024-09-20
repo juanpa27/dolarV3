@@ -18,11 +18,11 @@ import {
 const chartConfig: ChartConfig = {
   compra: {
     label: "Compra",
-    color: "hsl(var(--color-compra))", // Usando la variable CSS definida
+    color: 'hsl(var(--chart-1))',
   },
   venta: {
     label: "Venta",
-    color: "hsl(var(--color-venta))", // Usando la variable CSS definida
+    color: 'hsl(var(--chart-2))',
   },
 };
 
@@ -58,12 +58,20 @@ export default function GraficoBarra({ data }: GraficoBarraProps) {
               allowDataOverflow={true}
             />
             <ChartTooltip
-              cursor={false}
+              cursor={true}
               content={<ChartTooltipContent indicator="dashed" />}
             />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="compra" fill="#4ade80"  radius={4} />
-            <Bar dataKey="venta"  fill="#f87171"  radius={4} />
+            <Bar 
+              dataKey="compra" 
+              fill={chartConfig.compra.color}
+              radius={4} 
+            />
+            <Bar 
+              dataKey="venta"  
+              fill={chartConfig.venta.color}
+              radius={4} 
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

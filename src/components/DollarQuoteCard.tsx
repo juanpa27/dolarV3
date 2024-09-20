@@ -23,18 +23,38 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   const ventaSpring = useSpring({ number: venta, from: { number: 0 }, config: { tension: 120, friction: 14 } });
   const referencialSpring = useSpring({ number: referencial || 0, from: { number: 0 }, config: { tension: 120, friction: 14 } });
 
-  // Preparar los datos para el gráfico
   let chartData: Array<{ fecha: string; compra: number; venta: number }> = [];
 
   if (historicalData && historicalData.length > 0) {
+    
     chartData = historicalData.map(item => ({
-      fecha: item.fecha,
+      fecha: new Date(item.fecha).toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }),
       compra: (item.compra),
       venta: (item.venta),
     }));
-
+  
+    // Se añade valores del dia de hoy  
+     const today = new Date();
+     chartData.push({
+       fecha: today.toLocaleDateString('es-ES', {
+         day: '2-digit',
+         month: '2-digit',
+         year: 'numeric',
+       }),
+       compra: compra,  
+       venta: venta,    
+     })
+  
     // Ordenar los datos por fecha
-    chartData.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
+    chartData.sort((a, b) => {
+      const dateA = new Date(a.fecha.split("/").reverse().join("-"));
+      const dateB = new Date(b.fecha.split("/").reverse().join("-"));
+      return dateA.getTime() - dateB.getTime();
+    });
   }
 
   return (
@@ -42,11 +62,11 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
       <CardHeader className="pb-2 flex justify-center text-center">
         <CardTitle className="text-3xl font-bold">{entidad}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="mb-12">
         <div className="grid gap-4">
           <div className="flex justify-between items-center w-full">
             <span className="text-2xl font-bold">Compra:</span>
-            <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
+            <animated.span className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400">
               {compraSpring.number.to((n) => `₲${n.toFixed(0)}`)}
             </animated.span>
           </div>
@@ -59,7 +79,7 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
           {referencial !== undefined && (
             <div className="flex justify-between items-center">
               <span className="text-2xl font-bold">Ref. Diario:</span>
-              <animated.span className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400">
+              <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
                 {referencialSpring.number.to((n) => `₲${n.toFixed(2)}`)}
               </animated.span>
             </div>
@@ -67,11 +87,11 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
         </div>
        
       </CardContent>
-    {chartData.length > 0 && (
-      <div className="mt-4">
-        <GraficoLineal data={chartData} />
-      </div>
-    )}
+      {chartData.length > 0 && (
+        <div className="mt-4">
+          <GraficoLineal data={chartData} />
+        </div>
+      )}
     </Card>
   );
 };
