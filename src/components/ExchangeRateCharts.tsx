@@ -1,6 +1,6 @@
 import React from 'react';
 import GraficoBarra from './GraficoBarra';
-import GraficoLienal from './GraficoLineal';
+//import GraficoLienal from './GraficoLineal';
 
 interface ChartData {
   entidad: string;
@@ -8,9 +8,12 @@ interface ChartData {
   venta: number;
 }
 
+
 interface ExchangeRateChartsProps {
   chartData: ChartData[];
 }
+
+
 
 const ExchangeRateCharts: React.FC<ExchangeRateChartsProps> = React.memo(({ chartData }) => {
   return (
@@ -19,7 +22,7 @@ const ExchangeRateCharts: React.FC<ExchangeRateChartsProps> = React.memo(({ char
         <GraficoBarra data={chartData} />
       </div>
       <div className="w-full max-w-xl min-h-max">
-        <GraficoLienal />
+        
       </div>
     </div>
   );

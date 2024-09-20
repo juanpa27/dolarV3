@@ -5,6 +5,7 @@ export interface ExchangeRate {
   referencial_diario?: number;
 }
 
+
 export interface ExchangeRates {
   [entidad: string]: ExchangeRate;
 }

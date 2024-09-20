@@ -19,7 +19,11 @@ const useExchangeRates = () => {
         setUpdated(data.updated);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setError((error as any).message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
       } finally {
         setLoading(false);
       }

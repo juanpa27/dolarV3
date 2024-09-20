@@ -6,6 +6,7 @@ import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
 import ExchangeRateCards from './ExchangeRateCards';
 import ExchangeRateCharts from './ExchangeRateCharts';
 
+
 const ExchangeRateList: React.FC = () => {
   const { exchangeRates, updated, loading } = useExchangeRates();
   const { historicalRates } = useExchangeHistorical();
@@ -49,10 +50,12 @@ const ExchangeRateList: React.FC = () => {
       <ExchangeRateCards
         exchangeRates={exchangeRates}
         formattedEntityName={formattedEntityName}
+        historicalRates={historicalRates}
       />
 
       <ExchangeRateCharts
         chartData={chartData}
+        
       />
 
       {updated && (
