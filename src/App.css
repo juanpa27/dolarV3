@@ -39,12 +39,14 @@
 }
 
 .digital-font {
-  font-family: 'Digital-7', monospace;
+  /*font-family: 'Digital-7', monospace;*/
+  font-family: "Arial", "Roboto", sans-serif;
   color: red;
 }
 
 .digital-mono-font {
-  font-family: 'Digital-7 Mono', monospace;
+  /*font-family: 'Digital-7 Mono', monospace;*/
+  font-family: "Arial", "Roboto", sans-serif;
   color: red;
 }
 
