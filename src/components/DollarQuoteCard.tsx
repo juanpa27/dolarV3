@@ -67,20 +67,20 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
           <div className="flex justify-between items-center w-full">
             <span className="text-2xl font-bold">Compra:</span>
             <animated.span className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400">
-              {compraSpring.number.to((n) => `₲${n.toFixed(0)}`)}
+              {compraSpring.number.to((n) => `\u20B2${n.toFixed(0)}`)}
             </animated.span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-2xl font-bold">Venta:</span>
             <animated.span className="text-4xl font-bold digital-font text-red-600 dark:text-red-400">
-              {ventaSpring.number.to((n) => `₲${n.toFixed(0)}`)}
+              {ventaSpring.number.to((n) => `\u20B2${n.toFixed(0)}`)}
             </animated.span>
           </div>
           {referencial !== undefined && (
             <div className="flex justify-between items-center">
               <span className="text-2xl font-bold">Ref. Diario:</span>
               <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
-                {referencialSpring.number.to((n) => `₲${n.toFixed(2)}`)}
+                {referencialSpring.number.to((n) => `\u20B2${n.toFixed(2)}`)}
               </animated.span>
             </div>
           )}
