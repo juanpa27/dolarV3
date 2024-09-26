@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSpring, animated } from '@react-spring/web';
-import GraficoLineal from './GraficoLineal';
-import { ExchangeRateWithDate } from '../types/types';
+import { useSpring, animated } from "@react-spring/web";
+import GraficoLineal from "./GraficoLineal";
+import { ExchangeRateWithDate } from "../types/types";
 
 interface DollarQuoteCardProps {
   compra: number;
@@ -19,36 +19,47 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   referencial,
   historicalData,
 }) => {
-  const compraSpring = useSpring({ number: compra, from: { number: 0 }, config: { tension: 120, friction: 14 } });
-  const ventaSpring = useSpring({ number: venta, from: { number: 0 }, config: { tension: 120, friction: 14 } });
-  const referencialSpring = useSpring({ number: referencial || 0, from: { number: 0 }, config: { tension: 120, friction: 14 } });
+  const compraSpring = useSpring({
+    number: compra,
+    from: { number: 0 },
+    config: { tension: 120, friction: 14 },
+  });
+  const ventaSpring = useSpring({
+    number: venta,
+    from: { number: 0 },
+    config: { tension: 120, friction: 14 },
+  });
+  const referencialSpring = useSpring({
+    number: referencial || 0,
+    from: { number: 0 },
+    config: { tension: 120, friction: 14 },
+  });
 
   let chartData: Array<{ fecha: string; compra: number; venta: number }> = [];
 
   if (historicalData && historicalData.length > 0) {
-    
-    chartData = historicalData.map(item => ({
-      fecha: new Date(item.fecha).toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+    chartData = historicalData.map((item) => ({
+      fecha: new Date(item.fecha).toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
       }),
-      compra: (item.compra),
-      venta: (item.venta),
+      compra: item.compra,
+      venta: item.venta,
     }));
-  
-    // Se añade valores del dia de hoy  
-     const today = new Date();
-     chartData.push({
-       fecha: today.toLocaleDateString('es-ES', {
-         day: '2-digit',
-         month: '2-digit',
-         year: 'numeric',
-       }),
-       compra: compra,  
-       venta: venta,    
-     })
-  
+
+    // Se añade valores del dia de hoy
+    const today = new Date();
+    chartData.push({
+      fecha: today.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
+      compra: compra,
+      venta: venta,
+    });
+
     // Ordenar los datos por fecha
     chartData.sort((a, b) => {
       const dateA = new Date(a.fecha.split("/").reverse().join("-"));
@@ -66,26 +77,49 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
         <div className="grid gap-4">
           <div className="flex justify-between items-center w-full">
             <span className="text-2xl font-bold">Compra:</span>
+            <div className="flex items-baseline space-x-1">
+            <span
+                className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400"
+                style={{ fontFamily: "Arial, Roboto, sans-serif" }}
+              >
+                ₲
+              </span>
             <animated.span className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400">
-              {compraSpring.number.to((n) => `\u20B2${n.toFixed(0)}`)}
+              {compraSpring.number.to((n) => `${n.toFixed(0)}`)}
             </animated.span>
+          </div>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-2xl font-bold">Venta:</span>
-            <animated.span className="text-4xl font-bold digital-font text-red-600 dark:text-red-400">
-              {ventaSpring.number.to((n) => `\u20B2${n.toFixed(0)}`)}
-            </animated.span>
+            <div className="flex items-baseline space-x-1">
+              <span
+                className="text-4xl font-bold digital-font text-red-600 dark:text-red-400"
+                style={{ fontFamily: "Arial, Roboto, sans-serif" }}
+              >
+                ₲
+              </span>
+              <animated.span className="text-4xl font-bold digital-font text-red-600 dark:text-red-400">
+                {ventaSpring.number.to((n) => `${n.toFixed(0)}`)}
+              </animated.span>
+            </div>
           </div>
           {referencial !== undefined && (
             <div className="flex justify-between items-center">
               <span className="text-2xl font-bold">Ref. Diario:</span>
-              <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
-                {referencialSpring.number.to((n) => `\u20B2${n.toFixed(2)}`)}
-              </animated.span>
+              <div className="flex items-baseline space-x-1">
+                <span
+                  className="text-4xl font-bold digital-font text-green-600 dark:text-green-400"
+                  style={{ fontFamily: "Arial, Roboto, sans-serif" }}
+                >
+                  ₲
+                </span>
+                <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
+                  {referencialSpring.number.to((n) => `${n.toFixed(2)}`)}
+                </animated.span>
+              </div>
             </div>
           )}
         </div>
-       
       </CardContent>
       {chartData.length > 0 && (
         <div className="mt-4">
