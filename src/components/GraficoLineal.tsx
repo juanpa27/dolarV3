@@ -60,6 +60,7 @@ const GraficoLineal: React.FC<GraficoLinealProps> = ({ data }) => {
                 stroke={chartConfig.compra.color}
                 strokeWidth={2}
                 dot={false}
+                
               />
               <Line
                 dataKey="venta"

@@ -10,6 +10,7 @@ interface DollarQuoteCardProps {
   entidad: string;
   referencial?: number;
   historicalData?: ExchangeRateWithDate[];
+  
 }
 
 const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
@@ -18,7 +19,9 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   entidad,
   referencial,
   historicalData,
+  
 }) => {
+
   const compraSpring = useSpring({
     number: compra,
     from: { number: 0 },
@@ -122,7 +125,7 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
         </div>
       </CardContent>
       {chartData.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-4 mb-6">
           <GraficoLineal data={chartData} />
         </div>
       )}

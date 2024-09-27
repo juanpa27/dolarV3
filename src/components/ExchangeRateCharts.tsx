@@ -1,5 +1,5 @@
-import React from 'react';
-import GraficoBarra from './GraficoBarra';
+import React from "react";
+import GraficoBarra from "./GraficoBarra";
 //import GraficoLienal from './GraficoLineal';
 
 interface ChartData {
@@ -8,24 +8,20 @@ interface ChartData {
   venta: number;
 }
 
-
 interface ExchangeRateChartsProps {
   chartData: ChartData[];
 }
 
-
-
-const ExchangeRateCharts: React.FC<ExchangeRateChartsProps> = React.memo(({ chartData }) => {
-  return (
-    <div className="mt-8 flex flex-col lg:flex-row justify-center">
-      <div className="w-full max-w-xl min-h-max">
-        <GraficoBarra data={chartData} />
+const ExchangeRateCharts: React.FC<ExchangeRateChartsProps> = React.memo(
+  ({ chartData }) => {
+    return (
+      <div className="mt-8 flex flex-col lg:flex-row justify-center items-center">
+        <div className="w-full max-w-xl min-h-max">
+          <GraficoBarra data={chartData} />
+        </div>
       </div>
-      <div className="w-full max-w-xl min-h-max">
-        
-      </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default ExchangeRateCharts;

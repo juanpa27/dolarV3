@@ -34,12 +34,12 @@ export default function GraficoBarra({ data }: GraficoBarraProps) {
 
   const filteredData = data.filter(item => item.compra > 0 || item.venta > 0);
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Gráfico de Cotizaciones</CardTitle>
+        <CardTitle>Resumen por Entidad</CardTitle>
         <CardDescription>Compra y Venta</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="w-full h-full">
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={filteredData}>
             <CartesianGrid vertical={false} />

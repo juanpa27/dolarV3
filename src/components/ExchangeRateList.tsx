@@ -1,16 +1,28 @@
-import React, { useCallback } from 'react';
+import React, { useCallback,useState } from 'react';
 import useExchangeRates from '../hooks/useExchangeRates';
 import useExchangeHistorical from '../hooks/useExchangeHistorical';
 import { Badge } from '@/components/ui/badge';
 import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
 import ExchangeRateCards from './ExchangeRateCards';
 import ExchangeRateCharts from './ExchangeRateCharts';
+import MultiplierInput from './MultiplierInput';
 
 
 const ExchangeRateList: React.FC = () => {
   const { exchangeRates, updated, loading } = useExchangeRates();
   const { historicalRates } = useExchangeHistorical();
-  console.log(historicalRates);
+
+  const [multiplier, setMultiplier] = useState<number | ''>(1); // Estado para el multiplicador
+
+ // Función para manejar cambios en el input
+  const handleMultiplierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value === '' || /^[0-9]*$/.test(value)) {
+      setMultiplier(value === '' ? 1 : parseFloat(value)); // Acepta solo números y si está vacío lo establece en 1
+    }
+  };
+
+  
 
   const formattedEntityName = useCallback((entidad: string) => {
     switch (entidad) {
@@ -39,23 +51,25 @@ const ExchangeRateList: React.FC = () => {
     );
   }
 
+   // Los datos del gráfico no deben estar afectados por el multiplicador
   const chartData = Object.entries(exchangeRates).map(([entidad, data]) => ({
     entidad: formattedEntityName(entidad),
-    compra: data?.compra || 0,
-    venta: data?.venta || 0,
+    compra: data?.compra || 0, // Aquí los valores son los originales
+    venta: data?.venta || 0,   // Sin el multiplicador
   }));
 
   return (
     <>
+      <MultiplierInput multiplier={multiplier} onMultiplierChange={handleMultiplierChange} />
       <ExchangeRateCards
-        exchangeRates={exchangeRates}
+        exchangeRates={exchangeRates} 
         formattedEntityName={formattedEntityName}
         historicalRates={historicalRates}
+        multiplier={multiplier} 
       />
 
       <ExchangeRateCharts
         chartData={chartData}
-        
       />
 
       {updated && (
