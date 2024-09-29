@@ -10,7 +10,8 @@ interface DollarQuoteCardProps {
   entidad: string;
   referencial?: number;
   historicalData?: ExchangeRateWithDate[];
-  
+  originalCompra: number;  // Valor original sin multiplicar
+  originalVenta: number;   // Valor original sin multiplicar
 }
 
 const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
@@ -19,7 +20,8 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   entidad,
   referencial,
   historicalData,
-  
+  originalCompra,
+  originalVenta
 }) => {
 
   const compraSpring = useSpring({
@@ -51,7 +53,7 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
       venta: item.venta,
     }));
 
-    // Se añade valores del dia de hoy
+    // Se añade valores originales del día de hoy para el gráfico (sin multiplicar)
     const today = new Date();
     chartData.push({
       fecha: today.toLocaleDateString("es-ES", {
@@ -59,8 +61,8 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
         month: "2-digit",
         year: "numeric",
       }),
-      compra: compra,
-      venta: venta,
+      compra: originalCompra,  // Usar original sin multiplicar
+      venta: originalVenta,    // Usar original sin multiplicar
     });
 
     // Ordenar los datos por fecha
@@ -82,27 +84,27 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
             <span className="text-2xl font-bold">Compra:</span>
             <div className="flex items-baseline space-x-1">
             <span
-                className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400"
+                className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-blue-600 dark:text-blue-400"
                 style={{ fontFamily: "Arial, Roboto, sans-serif" }}
               >
                 ₲
               </span>
-            <animated.span className="text-4xl font-bold digital-font text-blue-600 dark:text-blue-400">
-              {compraSpring.number.to((n) => `${n.toFixed(0)}`)}
+              <animated.span className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-blue-600 dark:text-blue-400">
+                {compraSpring.number.to((n) => `${n.toLocaleString('es-ES', { minimumFractionDigits: 0 })}`)}
             </animated.span>
-          </div>
+          </div> 
           </div>
           <div className="flex justify-between items-center">
             <span className="text-2xl font-bold">Venta:</span>
             <div className="flex items-baseline space-x-1">
               <span
-                className="text-4xl font-bold digital-font text-red-600 dark:text-red-400"
+                className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-red-600 dark:text-red-400"
                 style={{ fontFamily: "Arial, Roboto, sans-serif" }}
               >
                 ₲
               </span>
-              <animated.span className="text-4xl font-bold digital-font text-red-600 dark:text-red-400">
-                {ventaSpring.number.to((n) => `${n.toFixed(0)}`)}
+              <animated.span className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-red-600 dark:text-red-400">
+                {ventaSpring.number.to((n) =>  `${n.toLocaleString('es-ES', { minimumFractionDigits: 0 })}`)}
               </animated.span>
             </div>
           </div>
@@ -111,13 +113,13 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
               <span className="text-2xl font-bold">Ref. Diario:</span>
               <div className="flex items-baseline space-x-1">
                 <span
-                  className="text-4xl font-bold digital-font text-green-600 dark:text-green-400"
+                  className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-green-600 dark:text-green-400"
                   style={{ fontFamily: "Arial, Roboto, sans-serif" }}
                 >
                   ₲
                 </span>
-                <animated.span className="text-4xl font-bold digital-font text-green-600 dark:text-green-400">
-                  {referencialSpring.number.to((n) => `${n.toFixed(2)}`)}
+                <animated.span className="text-4xl lg:text-4xl md:text-3xl sm:text-base font-bold digital-font text-green-600 dark:text-green-400">
+                  {referencialSpring.number.to((n) =>  `${n.toLocaleString('es-ES', { minimumFractionDigits: 0 })}`)}
                 </animated.span>
               </div>
             </div>
