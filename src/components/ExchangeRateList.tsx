@@ -3,6 +3,7 @@ import useExchangeRates from '../hooks/useExchangeRates';
 import useExchangeHistorical from '../hooks/useExchangeHistorical';
 import { Badge } from '@/components/ui/badge';
 import SkeletonDollarQuoteCard from './SkeletonDollarQuoteCard';
+import SkeletonMultiplier from './SkeletonMultiplier';
 import ExchangeRateCards from './ExchangeRateCards';
 import ExchangeRateCharts from './ExchangeRateCharts';
 import MultiplierInput from './MultiplierInput';
@@ -33,11 +34,15 @@ const ExchangeRateList: React.FC = () => {
 
   if (loading) {
     return (
+    <> 
+      <SkeletonMultiplier />
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[...Array(9)].map((_, index) => (
           <SkeletonDollarQuoteCard key={index} />
         ))}
       </div>
+    </>
     );
   }
 

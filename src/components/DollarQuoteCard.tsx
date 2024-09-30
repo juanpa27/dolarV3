@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSpring, animated } from "@react-spring/web";
 import GraficoLineal from "./GraficoLineal";
 import { ExchangeRateWithDate } from "../types/types";
+import { useShareCard } from "../hooks/useShareCard";
+import { ShareIcon } from "lucide-react";
 
 interface DollarQuoteCardProps {
   compra: number;
@@ -23,6 +25,7 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   originalCompra,
   originalVenta
 }) => {
+  const { handleShare } = useShareCard(); 
 
   const compraSpring = useSpring({
     number: compra,
@@ -74,9 +77,18 @@ const DollarQuoteCard: React.FC<DollarQuoteCardProps> = ({
   }
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader className="pb-2 flex justify-center text-center">
-        <CardTitle className="text-3xl font-bold">{entidad}</CardTitle>
+    <Card id={`card-${entidad}`} className="relative w-full max-w-md">
+    <CardHeader className="pb-2 flex justify-center text-center relative">
+      <CardTitle className="text-3xl font-bold">{entidad}</CardTitle>
+      {/* Botón de compartir posicionado dentro del header */}
+      <button
+        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 z-10"
+        onClick={() => handleShare(`card-${entidad}`, entidad)} 
+        aria-label={`Compartir cotización de ${entidad}`} 
+        title={`Compartir cotización de ${entidad}`}    
+      >
+        <ShareIcon className="w-5 h-5" />
+      </button>
       </CardHeader>
       <CardContent className="mb-12">
         <div className="grid gap-4">

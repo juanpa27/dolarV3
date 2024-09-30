@@ -31,7 +31,7 @@ const MultiplierInput: React.FC<MultiplierInputProps> = ({ multiplier, onMultipl
       const formattedValue = formatWithThousandSeparator(numericValue);
       setDisplayValue(formattedValue);
 
-      // Convertir el valor limpio a número y enviarlo a la función de cambio
+      
       onMultiplierChange(parseFloat(numericValue) || 0); // Enviar 0 si está vacío
     }
   };
@@ -43,18 +43,18 @@ const MultiplierInput: React.FC<MultiplierInputProps> = ({ multiplier, onMultipl
           Multiplicar por
         </Label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-2xl text-muted-foreground pointer-events-none">
             $
           </span>
           <Input
             id="multiplier"
-            type="text" // Cambiado a texto para permitir formato con puntos
+            type="text"
             value={displayValue}
             onChange={handleInputChange}
             placeholder="Dólar(es)"
-            className="pl-6 text-lg h-12"
-            maxLength={9} // Limitar el tamaño del input si es necesario
+            className="pl-6 text-2xl" 
             minLength={1}
+            maxLength={9}
           />
         </div>
       </div>
