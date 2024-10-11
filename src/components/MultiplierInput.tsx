@@ -8,7 +8,7 @@ type MultiplierInputProps = {
 };
 
 const MultiplierInput: React.FC<MultiplierInputProps> = ({ multiplier, onMultiplierChange }) => {
-  const [displayValue, setDisplayValue] = useState<string>(multiplier.toString());
+  const [displayValue, setDisplayValue] = useState<string>(multiplier ? multiplier.toString() : '1');
 
   // Función para limpiar el valor (quitar los puntos)
   const cleanNumber = (value: string) => {
@@ -21,18 +21,30 @@ const MultiplierInput: React.FC<MultiplierInputProps> = ({ multiplier, onMultipl
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    let value = event.target.value;
 
     // Limpiar el valor ingresado
-    const numericValue = cleanNumber(value);
+    let numericValue = cleanNumber(value);
 
     // Solo permitir números
     if (/^\d*$/.test(numericValue)) {
-      const formattedValue = formatWithThousandSeparator(numericValue);
-      setDisplayValue(formattedValue);
+      if (numericValue === '') {
+        // Si el campo está vacío, no modificar el valor visual (dejarlo vacío temporalmente)
+        setDisplayValue('');
+      } else {
+        // Formatear con separadores de miles y actualizar el valor visual
+        const formattedValue = formatWithThousandSeparator(numericValue);
+        setDisplayValue(formattedValue);
+        onMultiplierChange(parseFloat(numericValue));
+      }
+    }
+  };
 
-      
-      onMultiplierChange(parseFloat(numericValue) || 0); // Enviar 0 si está vacío
+  // Si el usuario deja el campo vacío y pierde el foco, restablecer a "1"
+  const handleInputBlur = () => {
+    if (displayValue === '') {
+      setDisplayValue('1');
+      onMultiplierChange(1);
     }
   };
 
@@ -48,11 +60,13 @@ const MultiplierInput: React.FC<MultiplierInputProps> = ({ multiplier, onMultipl
           </span>
           <Input
             id="multiplier"
-            type="text"
+            type="text" 
+            inputMode="numeric" 
             value={displayValue}
             onChange={handleInputChange}
+            onBlur={handleInputBlur} 
             placeholder="Dólar(es)"
-            className="pl-6 text-2xl" 
+            className="pl-6 text-2xl"
             minLength={1}
             maxLength={9}
           />
