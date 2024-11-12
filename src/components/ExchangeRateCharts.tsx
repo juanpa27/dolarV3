@@ -1,6 +1,6 @@
 import React from "react";
 import GraficoBarra from "./GraficoBarra";
-//import GraficoLienal from './GraficoLineal';
+//import GraficoLienal from "./GraficoLineal";
 
 interface ChartData {
   entidad: string;

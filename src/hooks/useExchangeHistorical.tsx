@@ -8,7 +8,7 @@ const useExchangeHistorical = () => {
 
   const fetchHistoricalRates = useCallback(async () => {
     try {
-      console.log('fetchHistoricalRates ejecutado');
+      
       const response = await fetch('https://dolar-cotizaciones-admin.vercel.app/api/exchange-rates');
       if (!response.ok) {
         throw new Error('Error al obtener los datos de la API');

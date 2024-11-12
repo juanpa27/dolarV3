@@ -13,6 +13,7 @@ interface GraficoLinealProps {
     compra: number;
     venta: number;
   }>;
+  interval?: number;
 }
 
 const chartConfig = {
@@ -26,7 +27,7 @@ const chartConfig = {
   },
 };
 
-const GraficoLineal: React.FC<GraficoLinealProps> = ({ data }) => {
+const GraficoLineal: React.FC<GraficoLinealProps> = ({ data,interval = 1  }) => {
   console.log(data);
   return (
         <ChartContainer config={chartConfig}>
@@ -44,7 +45,7 @@ const GraficoLineal: React.FC<GraficoLinealProps> = ({ data }) => {
                 tickLine={true}
                 axisLine={true}
                 tickMargin={3}
-                interval={1}
+                interval={interval}
                 tickFormatter={(value) => {
                   const [day, month] = value.split("/"); 
                   return `${day}/${month}`;              

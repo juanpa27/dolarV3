@@ -17,3 +17,12 @@ export interface ExchangeRateWithDate extends ExchangeRate {
 export interface HistoricalExchangeRates {
   [entidad: string]: ExchangeRateWithDate[];
 }
+
+
+export interface ExchangeRateWithDate {
+  fecha: string;
+  compra: number;
+  venta: number;
+  referencial_diario?: number;
+}
+
